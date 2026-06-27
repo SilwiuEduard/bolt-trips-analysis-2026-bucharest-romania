@@ -1,0 +1,16 @@
+order_reference,order_status,castig_net_lei,taxa_anulare_bolt,pret_brut_cursa,order_created_date,order_created_time
+MzI1LTI1MzQwMTIxNjctMzMyOTE1NDIwOQ,client_cancelled,12.75,0.0,-12.75,2026-06-01,19:10:13
+MzI1LTI0OTI2MjEzNjQtMzI1MzM4ODYxOA,client_cancelled,12.75,0.0,-12.75,2026-05-04,21:05:31
+MzI1LTI1MDgxNzcyNzMtMzI4MDcwMTQzMA,client_cancelled,12.75,0.0,-12.75,2026-05-15,19:55:00
+MzI1LTI1MjExMjk1NDYtMzMwNDQ0NjMxNw,client_cancelled,12.75,0.0,-12.75,2026-05-24,03:49:25
+MzI1LTI1MzQyOTQ5OTgtMzMyOTc1NTM2NQ,client_cancelled,12.75,0.0,-12.75,2026-06-02,00:09:26
+MzI1LTI0NTQxMTU3NTktMzE4ODc3Mzg5NQ,client_cancelled,12.75,17.0,0.0,2026-04-06,20:52:52
+MzI1LTI1MjUwOTY4NTYtMzMxMjE4ODQyMw,client_cancelled,12.75,17.0,0.0,2026-05-27,02:34:12
+MzI1LTI1MzcwMDc4NzItMzMzNDc5Mjg5MA,client_cancelled,12.75,17.0,0.0,2026-06-03,23:42:17
+MzI1LTI1MTMwNDA0NDctMzI4OTQ3MjA5OA,client_did_not_show,12.75,0.0,-12.75,2026-05-18,21:00:46
+MzI1LTI1MDM4NzkxOTItMzI3MzI5MjQ4MA,client_did_not_show,12.75,0.0,-12.75,2026-05-12,20:42:12
+MzI1LTI0NzcxOTA5NjMtMzIyNjk3MzcwNw,client_did_not_show,12.75,17.0,0.0,2026-04-23,19:57:50
+MzI1LTI0OTQ2NjAyNzQtMzI1NjcxNjk2Mg,client_did_not_show,12.75,17.0,0.0,2026-05-06,15:09:18
+MzI1LTI1MjcyNTE0NzctMzMxNjEzOTQ4NA,client_did_not_show,12.75,17.0,0.0,2026-05-28,15:13:47
+MzI1LTI1MzEzNTM0MzItMzMyMzk5NzUwMQ,client_did_not_show,12.75,17.0,0.0,2026-05-30,23:51:00
+MzI1LTI1Mzk2ODc4MjYtMzMzOTU5MjMxOQ,client_did_not_show,12.75,17.0,0.0,2026-06-05,21:07:01

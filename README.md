@@ -1,0 +1,150 @@
+# Bolt Analytics: Operational & Financial Optimization of Ridesharing Activity
+
+<p align="center">
+  <img src="./images/powerBI_animation.gif" alt="Power BI Dashboard Demo" width="600">
+</p>
+
+Choose Language / Alege Limba:
+
+- 🌍 **[English Version](#-english-version)**
+- 🇷🇴 **[Versiunea in Romana](#-versiunea-in-romana)**
+
+---
+
+## 🌍 English Version
+
+Main Objective: Identify operational and financial patterns to maximize actual net profit per driving hour, while minimizing vehicle wear and unproductive time.
+
+An applied Data Analytics project based on my real-world activity as a licensed independent professional (PFA) within the Bolt platform, starting February 25, 2026. This project demonstrates how data cleaning, SQL querying, and analysis techniques can transform an intuition-driven operational activity into a mathematically optimized business.
+
+### 🎯 Business Project Objectives
+
+The analysis was designed to meet a strict revenue maximization and resource optimization challenge:
+
+1. **Financial Target:** Generate a gross revenue of **2,000 - 2,500 LEI / week**.
+2. **Time Efficiency:** Compress total online working time **under a 40-hour threshold** per week.
+3. **Sustainability:** Minimize vehicle wear (VW Touran 1.6 TDI DSG) by reducing dead mileage ("dead kilometers") and avoiding heavy stop-and-go traffic.
+
+### 🛠️ Technologies & Tools Used
+
+- **Python:** Data extraction via Bolt's endpoints and initial data preprocessing/cleaning.
+- **SQL (Google BigQuery):** Aggregating, filtering, and querying the core dataset.
+- **Power BI:** Building an interactive dashboard used for tracking weekly KPIs.
+- **Markdown / Git:** Documenting the project architecture and presenting the data findings.
+
+### 📈 Data Insights & Economic Findings
+
+By querying and segmenting the raw data stored in `silviu-extract_20260606_174023-orders-calculat`, I isolated the patterns that separate inefficient shifts from maximum-yield windows.
+
+#### 1. Speed Profile & Traffic Bottlenecks (Q1, Q2, Q3)
+
+- **Overall Average Speed:** A standard completed ride averages **6.1 km** and takes **15.7 minutes**, at an average speed of **23.5 km/h**.
+- **Daytime Operational Block:** Between **07:00 - 17:00**, traffic collapses speeds to an absolute low of **14.4 km/h** (at 07:00). Ride volume remains low (4 - 50 cumulative rides historically), turning this window into a waste of time and fuel.
+- **The Golden Window:** Between **18:00 - 23:00**, speed increases steadily (**20.6 - 28.6 km/h**), overlapping with the highest order volume (peaks of **147 - 189 rides** at 20:00 - 21:00).
+- **Optimal Days:** Sunday (**26.4 km/h**) and Saturday (**25.6 km/h**) offer the best traffic fluidity. Thursday is the slowest day (**20.2 km/h**).
+
+#### 2. Financial Efficiency & Hotspots (Q4, Q5, Q6, Q7)
+
+- **Earnings per Minute:** Afternoons (10:00 - 15:00) deliver a critical minimum of **0.8 - 1.0 LEI / minute**. Conversely, night shifts (23:00 - 03:00) skyrocket to **1.5 - 2.3 LEI / minute**.
+- **Top Weekly Intervals (Elite):** Sunday morning at 02:00 holds the absolute historical record of **112.6 LEI / hour**, followed closely by 03:00 at **100.4 LEI / hour**, and Saturday midnight at **87.9 LEI / hour**.
+- **Cash vs. Card Correlation (Q12):** Both payment methods deliver identical financial performance (**1.4 LEI / minute** and **3.6 - 3.7 LEI / km**), proving both flows must be treated with equal operational priority.
+
+#### 3. Distance Optimization & Dead Mileage (Q8, Q9, Q10)
+
+- **Ride Segmentation:** Short rides (0-3 km) are the most profitable per unit of time, generating **1.7 LEI / minute** and **5.4 LEI / km**, with minimal pickup distances (**1.0 km**). Long rides (>8 km) drop to **2.8 LEI / km**.
+- **Unproductive Rushing:** The **05:00** hour mark is the most inefficient, generating **44.5% dead mileage**. The **21:00** slot represents the historical low for dead mileage (**17.6%**).
+- **Utilization Rate:** Maintaining an average app utilization rate of **84.7%** scales the overall hourly net profit to **60.74 LEI / hour**. On peak days with **95.1%** utilization, net earnings reach **92.6 LEI / hour**.
+
+#### 4. Long-Term Strategy Validation (Q11)
+
+- **Operational Evolution:** Macro analysis highlights the transition from the debut phase (week of Mar-02), where I worked an inefficient maximum of **48.0 hours** to generate **2,286.9 LEI** (**47.6 LEI / hour**), to the maturity phase (week of May-25), yielding a record **2,460.6 LEI** in just **30.7 online hours** (**80.2 LEI / hour**).
+
+### ⚡ Synthesized Operational Strategy (Act)
+
+| What I Do (Maximize Efficiency)                                                                             | What I AVOID (Eliminate Waste Time)                                                                             |
+| :---------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| Focus driving hours strictly inside a **Compressed Work Week** (30-35 online hours) using the Top 20 slots. | **Avoid the 07:00 - 16:00 weekday window** to prevent getting stuck in heavy traffic below 17 km/h.             |
+| Secure maximum presence during **nighttime weekends** (Saturday & Sunday, 22:00 - 04:00).                   | **Do not cancel rides prematurely** as a driver; always wait the full 5-minute timer to secure the no-show fee. |
+| Prioritize **short rides (0-3 km)** in high-density sectors for a fast pace of 1.7 LEI / minute.            | **Do not accept long rides during heavy traffic** or pickup dispatches that exceed 1.5 dead km.                 |
+
+### 📂 Repository Structure
+
+- `/data` - Contains clean, aggregated, and optimized CSV files.
+- `/sql` - Production SQL queries used to extract metrics.
+- `/python` - Python scripts for data cleaning and preprocessing (`bolt_fleet_extractor.py`).
+- `/docs` - **[Access full detailed analysis reports for each query (Q1-Q13)](./docs/Analysis_Detailed_EN.md)**
+- `/images` - Contains the gif with the presentation of the project in PowerBI
+
+### 🎛️ Project Dashboard
+
+- **Download the local report file from the repository: `[📊 Download Power BI File](./powerbi/Bolt_Analysis_Silviu.pbix)`**
+
+---
+
+## 🇷🇴 Versiunea in Romana
+
+Obiectivul principal: Identificarea tiparelor operaționale și financiare pentru a maximiza profitul net real pe ora de condus, minimizând în același timp uzura vehiculului și timpii neproductivi.
+
+Este un proiect de Data Analytics aplicat, bazat pe activitatea mea reala ca sofer autorizat (PFA) in cadrul platformei Bolt, incepand cu 25 februarie 2026. Proiectul demonstreaza modul in care tehnicile de curatare, interogare (SQL) si analiza a datelor pot fi folosite pentru a transforma o activitate operationala ghidata de intuitie intr-un business optimizat matematic.
+
+### 🎯 Obiectivele Proiectului de Business
+
+Analiza a fost proiectata pentru a raspunde unei provocari stricte de maximizare a veniturilor si de optimizare a resurselor:
+
+1. **Target Financiar:** Generarea unui venit brut de **2000 - 2500 LEI / saptamana**.
+2. **Eficienta Timpului:** Comprimarea timpului total de lucru **sub pragul de 40 de ore** pe saptamana.
+3. **Sustenabilitate:** Minimizarea uzurii tehnice a vehiculului (VW Touran 1.6 TDI DSG) prin reducerea kilometrilor parcursi in gol ("kilometri morti") si evitarea traficului greu (regim stop-and-go).
+
+### 🛠️ Tehnologii si Instrumente Utilizate
+
+- **Python:** Pentru extragerea datelor din API oferit de Bolt si curatarea initiala a datelor.
+- **SQL (Google BigQuery):** Pentru agregarea, filtrarea si interogarea setului de date brute.
+- **Power BI:** Pentru constructia unui dashboard interactiv utilizat in monitorizarea KPI-urilor saptamanali.
+- **Markdown / Git:** Pentru documentarea arhitecturii proiectului si prezentarea rezultatelor.
+
+### 📈 Rezultatele Analizei si Insights Economice
+
+Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_20260606_174023-orders-calculat`, am extras tiparele care separa turele ineficiente de cele cu randament maxim.
+
+#### 1. Profilul Vitezei si Blocajele din Trafic (Q1, Q2, Q3)
+
+- **Viteza medie generala:** O cursa standard are in medie **6.1 km** si dureaza **15.7 minute**, la o viteza medie de **23.5 km/h**.
+- **Blocajul operational de zi:** Intre orele **07:00 - 17:00**, traficul prabuseste viteza la un minim de **14.4 km/h** (ora 07:00). Volumul de curse ramane scazut (4 - 50 curse in istoric), transformand intervalul intr-o risipa de timp si combustibil.
+- **Fereastra de aur:** Intre orele **18:00 - 23:00**, viteza creste constant (**20.6 - 28.6 km/h**), suprapunandu-se pe cel mai mare volum de comenzi (varfuri de **147 - 189 de curse** la orele 20:00 - 21:00).
+- **Zile optime:** Duminica (**26.4 km/h**) si Sambata (**25.6 km/h**) ofera cea mai mare fluiditate. Joi este cea mai lenta zi (**20.2 km/h**).
+
+#### 2. Eficienta Financiara si Hotspots (Q4, Q5, Q6, Q7)
+
+- **Randamentul pe minut:** Amiezile (10:00 - 15:00) livreaza un minim critic de **0.8 - 1.0 LEI / minut**. In schimb, noptile (23:00 - 03:00) urca la **1.5 - 2.3 LEI / minut**.
+- **Top intervale saptamanale (Elite):** Duminica dimineata la ora 02:00 inregistreaza recordul absolut de **112.6 LEI / ora**, urmata de ora 03:00 cu **100.4 LEI / ora** si Sambata la miezul noptii cu **87.9 LEI / ora**.
+- **Corelatia Cash vs Card (Q12):** Ambele metode de plata au performante financiare identice (**1.4 LEI / minut** si **3.6 - 3.7 LEI / km**), demonstrand ca ambele fluxuri trebuie tratate cu egala prioritate.
+
+#### 3. Optimizarea Distantelor si Kilometrii Morti (Q8, Q9, Q10)
+
+- **Segmentarea curselor:** Cursele scurte (0-3 km) sunt cele mai rentabile pe timp, generand **1.7 LEI / minut** si **5.4 LEI / km**, avand preluari minime (**1.0 km**). Cursele lungi (>8 km) scad la **2.8 LEI / km**.
+- **Rularea in gol:** Ora **05:00** este cea mai ineficienta, generand **44.5% kilometri morti**. Ora **21:00** reprezinta minimul istoric de rulare in gol (**17.6%**).
+- **Rata de utilizare:** Mentinerea unei rate medii de utilizare a aplicatiei de **84.7%** scaleaza castigul mediu general la **60.74 LEI / ora**. In zilele de varf, cand utilizarea atinge **95.1%**, castigul net urca la **92.6 LEI / ora**.
+
+#### 4. Validarea Strategiei pe Termen Lung (Q11)
+
+- **Evolutia operationala:** Analiza macro arata tranzitia de la faza de debut (saptamana 02-Mar), unde am lucrat un maxim ineficient de **48.0 ore** pentru **2,286.9 LEI** (**47.6 LEI / ora**), la faza de maturitate (saptamana 25-May), unde am realizat un record de **2,460.6 LEI** in doar **30.7 ore online**, ridicand randamentul la **80.2 LEI / ora**.
+
+### ⚡ Strategia Operationala Sintetizata (Act)
+
+| Ce Fac (Maximizare Eficienta)                                                                        | Ce NU Fac (Evitare Timp Mort)                                                                                             |
+| :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
+| Conduc concentrat in **Saptamana Comprimata** (30-35 ore online) folosind exclusiv Top 20 intervale. | **Evit intervalul 07:00 - 16:00** in timpul saptamanii pentru a nu ramane blocat in trafic la viteze sub 17 km/h.         |
+| Sunt prezent pe traseu in **weekend-ul nocturn** (Sambata si Duminica, orele 22:00 - 04:00).         | **Nu anulez prematur cursele** din pozitia de sofer inainte de cele 5 minute regulamentare pentru a asigura taxa no-show. |
+| Prioritizez **cursele scurte (0-3 km)** in zone dense pentru un randament rapid de 1.7 LEI / minut.  | **Nu accept curse lungi in trafic intens** sau preluari in gol ce depasesc 1.5 km.                                        |
+
+### 📂 Structura Repository-ului
+
+- `/data` - Contine de date CSV agregate si optimizate.
+- `/sql` - Interogarile SQL utilizate pentru extragerea metricilor.
+- `/python` - Scripturi Python pentru curatarea si prelucrarea datelor brute (`bolt_fleet_extractor.py`).
+- `/docs` - **[Aici gasiti analizele complete si detaliate pentru fiecare query](./docs/Analiza_Detaliata_RO.md)**
+- `/images` - Contine gif-ul cu prezentarea proiectului in BI
+
+### 🎛️ Dashboard Proiect
+
+- **Poti descarca fisierul local direct din repository: `[📊 Descarca fisierul Power BI](./powerbi/Bolt_Analysis_Silviu.pbix)`**
