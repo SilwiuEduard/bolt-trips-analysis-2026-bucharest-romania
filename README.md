@@ -15,7 +15,7 @@ Choose Language / Alege Limba:
 
 Main Objective: Identify operational and financial patterns to maximize actual net profit per driving hour, while minimizing vehicle wear and unproductive time.
 
-An applied Data Analytics project based on my real-world activity as a licensed independent professional (PFA) within the Bolt platform, starting February 25, 2026. This project demonstrates how data cleaning, SQL querying, and analysis techniques can transform an intuition-driven operational activity into a mathematically optimized business.
+An applied Data Analytics project based on my real-world activity as a licensed independent professional (PFA) within the Bolt platform, starting 25 February 2026. This project demonstrates how data cleaning, SQL querying, and analysis techniques can transform an intuition-driven operational activity into a mathematically optimized business.
 
 ### 🎯 Business Project Objectives
 
@@ -34,7 +34,7 @@ The analysis was designed to meet a strict revenue maximization and resource opt
 
 ### 📈 Data Insights & Economic Findings
 
-By querying and segmenting the raw data stored in `silviu-extract_20260606_174023-orders-calculat`, I isolated the patterns that separate inefficient shifts from maximum-yield windows.
+By querying and segmenting the raw data stored in `silviu-extract_20260606_174023-orders-calculat` from the period `25.02.2026 to 06.06.2026`, I isolated the patterns that separate inefficient shifts from maximum-yield windows.
 
 #### 1. Speed Profile & Traffic Bottlenecks (Q1, Q2, Q3)
 
@@ -83,7 +83,7 @@ By querying and segmenting the raw data stored in `silviu-extract_20260606_17402
 
 ## 🇷🇴 Versiunea in Romana
 
-Obiectivul principal: Identificarea tiparelor operaționale și financiare pentru a maximiza profitul net real pe ora de condus, minimizând în același timp uzura vehiculului și timpii neproductivi.
+Obiectivul principal: Identificarea tiparelor operationale si financiare pentru a maximiza profitul net real pe ora de condus, minimizand in acelasi timp uzura vehiculului si timpii neproductivi.
 
 Este un proiect de Data Analytics aplicat, bazat pe activitatea mea reala ca sofer autorizat (PFA) in cadrul platformei Bolt, incepand cu 25 februarie 2026. Proiectul demonstreaza modul in care tehnicile de curatare, interogare (SQL) si analiza a datelor pot fi folosite pentru a transforma o activitate operationala ghidata de intuitie intr-un business optimizat matematic.
 
@@ -104,7 +104,7 @@ Analiza a fost proiectata pentru a raspunde unei provocari stricte de maximizare
 
 ### 📈 Rezultatele Analizei si Insights Economice
 
-Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_20260606_174023-orders-calculat`, am extras tiparele care separa turele ineficiente de cele cu randament maxim.
+Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_20260606_174023-orders-calculat` din perioada `25.02.2026 - 06.06.2026`, am extras tiparele care separa turele ineficiente de cele cu randament maxim.
 
 #### 1. Profilul Vitezei si Blocajele din Trafic (Q1, Q2, Q3)
 
@@ -139,7 +139,7 @@ Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_2026060
 
 ### 📂 Structura Repository-ului
 
-- `/data` - Contine de date CSV agregate si optimizate.
+- `/data` - Contine date CSV agregate si optimizate.
 - `/sql` - Interogarile SQL utilizate pentru extragerea metricilor.
 - `/python` - Scripturi Python pentru curatarea si prelucrarea datelor brute (`bolt_fleet_extractor.py`).
 - `/docs` - **[Aici gasiti analizele complete si detaliate pentru fiecare query](./docs/Analiza_Detaliata_RO.md)**
