@@ -72,12 +72,12 @@ By querying and segmenting the raw data stored in `silviu-extract_20260606_17402
 - `/data` - Contains clean, aggregated, and optimized CSV files.
 - `/sql` - Production SQL queries used to extract metrics.
 - `/python` - Python scripts for data cleaning and preprocessing (`bolt_fleet_extractor.py`).
-- `/docs` - **[Access full detailed analysis reports for each query (Q1-Q13)](./docs/Analysis_Detailed_EN.md)**
+- `/docs` - **[Access full detailed analysis reports for each query](./docs/Analysis_Detailed_EN.md)**
 - `/images` - Contains the gif with the presentation of the project in PowerBI
 
 ### 🎛️ Project Dashboard
 
-- **Download the local report file from the repository: `[📊 Download Power BI File](./powerbi/Bolt_Analysis_Silviu.pbix)`**
+- **Download the local report file from the repository: [📊 Download Power BI File](./powerbi/Bolt_Analysis_Silviu.pbix)**
 
 ---
 
@@ -147,4 +147,4 @@ Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_2026060
 
 ### 🎛️ Dashboard Proiect
 
-- **Poti descarca fisierul local direct din repository: `[📊 Descarca fisierul Power BI](./powerbi/Bolt_Analysis_Silviu.pbix)`**
+- **Poti descarca fisierul local direct din repository: [📊 Descarca fisierul Power BI](./powerbi/Bolt_Analysis_Silviu.pbix)**
