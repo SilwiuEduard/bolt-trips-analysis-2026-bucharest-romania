@@ -1,4 +1,4 @@
-# Bolt Analytics: Operational & Financial Optimization of Ridesharing Activity
+# 🚕 Bolt Analytics: Enterprise ETL Pipeline & Operational Optimization
 
 <p align="center">
   <img src="./images/powerBI_animation.gif" alt="Power BI Dashboard Demo" width="600">
@@ -13,28 +13,43 @@ Choose Language / Alege Limba:
 
 ## 🌍 English Version
 
+### 📌 Project Overview
+
+An **end-to-end Data Engineering & Business Intelligence pipeline** analyzing operational and financial performance across the Bolt rideshare platform in Bucharest.
+
+This project covers the complete data lifecycle:
+
+1. **Automated Enterprise Extraction (Python + REST API):** Weekly incremental ingestion and backfill of raw operational data (`orders`, `state_logs`, `drivers`, `vehicles`).
+2. **Automated CI/CD Orchestration (GitHub Actions):** Scheduled jobs running weekly in the cloud to keep raw datasets up-to-date without manual intervention.
+3. **Private Cloud Storage (Azure Blob Storage - Bronze Layer):** Secure raw JSON/CSV storage isolated from public repositories for privacy and security.
+4. **Data Warehousing & Analytics (Google BigQuery SQL):** Clean transformation logic, window functions, and advanced metric calculations.
+5. **Executive Visualization (Power BI):** Dynamic dashboard tracking revenue efficiency, dead mileage, and optimal shift patterns.
+
+---
+
+### 🛠️ Tech Stack & Architecture
+
+- **Extraction & Ingestion:** Python (`requests`, `pandas`, `azure-storage-blob`, `python-dotenv`)
+- **CI/CD & Orchestration:** GitHub Actions (Automated weekly Cron trigger)
+- **Data Lake (Bronze Layer):** Azure Blob Storage (Container: `bronze`)
+- **Data Warehousing & Transformation:** SQL / Google BigQuery (`CTE`, `WINDOW functions`, `SAFE_CAST`)
+- **Business Intelligence & Visualization:** Power BI (DAX, Interactive Reporting)
+
+---
+
+### 🎯 Business Objectives
+
 Main Objective: Identify operational and financial patterns to maximize actual net profit per driving hour, while minimizing vehicle wear and unproductive time.
 
-An applied Data Analytics project based on my real-world activity as a licensed independent professional (PFA) within the Bolt platform, starting 25 February 2026. This project demonstrates how data cleaning, SQL querying, and analysis techniques can transform an intuition-driven operational activity into a mathematically optimized business.
+An applied Data Analytics project based on my real-world activity as a licensed independent professional (PFA) within the Bolt platform, starting 25 February 2026.
 
-### 🛠️ Technologies & Tools Used
+1. **Financial Target:** Maintain a consistent gross revenue between **2,000 - 2,500 LEI / week**.
+2. **Time Efficiency:** Compress working hours **under 40 online hours / week** by targeting high-yield time slots.
+3. **Resource Sustainability:** Minimize vehicle wear (VW Touran 1.6 TDI DSG) by reducing dead mileage ("dead kilometers") and avoiding heavy stop-and-go traffic.
 
-- **Python:** Data extraction via Bolt's endpoints and initial data preprocessing/cleaning.
-- **SQL (Google BigQuery):** Aggregating, filtering, and querying the core dataset.
-- **Power BI:** Building an interactive dashboard used for tracking weekly KPIs.
-- **Markdown / Git:** Documenting the project architecture and presenting the data findings.
+---
 
-### 🎯 Business Project Objectives
-
-The analysis was designed to meet a strict revenue maximization and resource optimization challenge:
-
-1. **Financial Target:** Generate a gross revenue of **2,000 - 2,500 LEI / week**.
-2. **Time Efficiency:** Compress total online working time **under a 40-hour threshold** per week.
-3. **Sustainability:** Minimize vehicle wear (VW Touran 1.6 TDI DSG) by reducing dead mileage ("dead kilometers") and avoiding heavy stop-and-go traffic.
-
-### 📈 Data Insights & Economic Findings
-
-By querying and segmenting the raw data stored in `silviu-extract_20260606_174023-orders-calculat` from the period `25.02.2026 to 06.06.2026`, I isolated the patterns that separate inefficient shifts from maximum-yield windows.
+### 📈 Key Data Insights & Findings analyzing operational records from `25.02.2026 to 06.06.2026`:
 
 #### 1. Speed Profile & Traffic Bottlenecks (Q1, Q2, Q3)
 
@@ -59,6 +74,8 @@ By querying and segmenting the raw data stored in `silviu-extract_20260606_17402
 
 - **Operational Evolution:** Macro analysis highlights the transition from the debut phase (week of Mar-02), where I worked an inefficient maximum of **48.0 hours** to generate **2,286.9 LEI** (**47.6 LEI / hour**), to the maturity phase (week of May-25), yielding a record **2,460.6 LEI** in just **30.7 online hours** (**80.2 LEI / hour**).
 
+---
+
 ### ⚡ Synthesized Operational Strategy (Act)
 
 | What I Do (Maximize Efficiency)                                                                             | What I AVOID (Eliminate Waste Time)                                                                             |
@@ -67,13 +84,19 @@ By querying and segmenting the raw data stored in `silviu-extract_20260606_17402
 | Secure maximum presence during **nighttime weekends** (Saturday & Sunday, 22:00 - 04:00).                   | **Do not cancel rides prematurely** as a driver; always wait the full 5-minute timer to secure the no-show fee. |
 | Prioritize **short rides (0-3 km)** in high-density sectors for a fast pace of 1.7 LEI / minute.            | **Do not accept long rides during heavy traffic** or pickup dispatches that exceed 1.5 dead km.                 |
 
+---
+
 ### 📂 Repository Structure
 
-- `/data` - Contains clean, aggregated, and optimized CSV files.
-- `/sql` - Production SQL queries used to extract metrics.
-- `/python` - Python scripts for data cleaning and preprocessing (`bolt_fleet_extractor.py`).
-- `/docs` - **[Access full detailed analysis reports for each query](./docs/Analysis_Detailed_EN.md)**
-- `/images` - Contains the gif with the presentation of the project in PowerBI
+- `/.github/workflows/` - GitHub Actions CI/CD pipeline (`weekly_extraction.yml`).
+- `/python/` - Production extraction script (`bolt_fleet_extractor.py`).
+- `/data/` - Local ingestion root (Contains `data_bronze/` local folder, ignored in Git for privacy).
+- `/sql/` - BigQuery SQL transformation scripts and analytical query exports.
+- `/docs/` - Full detailed analysis reports for each query.
+- `/powerbi/` - Power BI template and dashboard files.
+- `/images/` - Visual assets and dashboard presentation GIFs.
+
+---
 
 ### 🎛️ Project Dashboard
 
@@ -83,28 +106,43 @@ By querying and segmenting the raw data stored in `silviu-extract_20260606_17402
 
 ## 🇷🇴 Versiunea in Romana
 
-Obiectivul principal: Identificarea tiparelor operationale si financiare pentru a maximiza profitul net real pe ora de condus, minimizand in acelasi timp uzura vehiculului si timpii neproductivi.
+### 📌 Prezentarea Proiectului
 
-Este un proiect de Data Analytics aplicat, bazat pe activitatea mea reala ca sofer autorizat (PFA) in cadrul platformei Bolt, incepand cu 25 februarie 2026. Proiectul demonstreaza modul in care tehnicile de curatare, interogare (SQL) si analiza a datelor pot fi folosite pentru a transforma o activitate operationala ghidata de intuitie intr-un business optimizat matematic.
+Un pipeline complet de **Data Engineering si Business Intelligence** pentru analiza performantei operationale si financiare in cadrul platformei de ride-sharing Bolt in Bucuresti.
+
+Proiectul acopera intregul ciclu de viata al datelor:
+
+1. **Extragere Automata Enterprise (Python + REST API):** Ingestie si backfill incremental saptamanal pentru datele brute (`orders`, `state_logs`, `drivers`, `vehicles`).
+2. **Orchestrare CI/CD Automata (GitHub Actions):** Rulari programate saptamanal in cloud pentru actualizarea datelor fara interventie manuala.
+3. **Stocare Privata Cloud (Azure Blob Storage - Bronze Layer):** Stocare securizata a datelor brute (JSON/CSV) izolata de repository-ul public pentru protectia datelor (GDPR).
+4. **Data Warehousing & Analiza (Google BigQuery SQL):** Interogari complexe, functii de fereastra (WINDOW functions) si calcularea KPI-urilor financiare.
+5. **Vizualizare de Nivel Executiv (Power BI):** Dashboard interactiv pentru urmarirea veniturilor, kilometrilor morti si optimizarea turelor.
+
+---
 
 ### 🛠️ Tehnologii si Instrumente Utilizate
 
-- **Python:** Pentru extragerea datelor din API oferit de Bolt si curatarea initiala a datelor.
-- **SQL (Google BigQuery):** Pentru agregarea, filtrarea si interogarea setului de date brute.
-- **Power BI:** Pentru constructia unui dashboard interactiv utilizat in monitorizarea KPI-urilor saptamanali.
-- **Markdown / Git:** Pentru documentarea arhitecturii proiectului si prezentarea rezultatelor.
+- **Extragere si Ingestie:** Python (`requests`, `pandas`, `azure-storage-blob`, `python-dotenv`)
+- **CI/CD si Orchestrare:** GitHub Actions (Cron job saptamanal)
+- **Data Lake (Bronze Layer):** Azure Blob Storage (Container: `bronze`)
+- **Data Warehousing si Transforma:r** SQL / Google BigQuery (`CTE`, `WINDOW functions`, `SAFE_CAST`)
+- **Business Intelligence:** Power BI (DAX, Raportare Interactiva)
+
+---
 
 ### 🎯 Obiectivele Proiectului de Business
 
-Analiza a fost proiectata pentru a raspunde unei provocari stricte de maximizare a veniturilor si de optimizare a resurselor:
+Obiectivul principal: Identificarea tiparelor operationale si financiare pentru a maximiza profitul net real pe ora de condus, minimizand in acelasi timp uzura vehiculului si timpii neproductivi.
 
-1. **Target Financiar:** Generarea unui venit brut de **2000 - 2500 LEI / saptamana**.
-2. **Eficienta Timpului:** Comprimarea timpului total de lucru **sub pragul de 40 de ore** pe saptamana.
-3. **Sustenabilitate:** Minimizarea uzurii tehnice a vehiculului (VW Touran 1.6 TDI DSG) prin reducerea kilometrilor parcursi in gol ("kilometri morti") si evitarea traficului greu (regim stop-and-go).
+Este un proiect de Data Analytics aplicat, bazat pe activitatea mea reala ca sofer autorizat (PFA) in cadrul platformei Bolt, incepand cu 25 februarie 2026.
 
-### 📈 Rezultatele Analizei si Insights Economice
+1. **Target Financiar:** Mentinerea unui venit brut intre **2000 - 2500 LEI / saptamana**.
+2. **Eficienta Timpului:** Comprimarea timpului de lucru **sub 40 de ore online / saptamana**.
+3. **Sustenabilitatea Resurselor:** Minimizarea uzurii tehnice a vehiculului (VW Touran 1.6 TDI DSG) prin reducerea kilometrilor parcursi in gol ("kilometri morti") si evitarea traficului greu (regim stop-and-go).
 
-Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_20260606_174023-orders-calculat` din perioada `25.02.2026 - 06.06.2026`, am extras tiparele care separa turele ineficiente de cele cu randament maxim.
+---
+
+### 📈 Rezultate si Insights Cheie Analizand datele operationale din perioada `25.02.2026 - 06.06.2026`:
 
 #### 1. Profilul Vitezei si Blocajele din Trafic (Q1, Q2, Q3)
 
@@ -129,6 +167,8 @@ Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_2026060
 
 - **Evolutia operationala:** Analiza macro arata tranzitia de la faza de debut (saptamana 02-Mar), unde am lucrat un maxim ineficient de **48.0 ore** pentru **2,286.9 LEI** (**47.6 LEI / ora**), la faza de maturitate (saptamana 25-May), unde am realizat un record de **2,460.6 LEI** in doar **30.7 ore online**, ridicand randamentul la **80.2 LEI / ora**.
 
+---
+
 ### ⚡ Strategia Operationala Sintetizata (Act)
 
 | Ce Fac (Maximizare Eficienta)                                                                        | Ce NU Fac (Evitare Timp Mort)                                                                                             |
@@ -137,34 +177,22 @@ Prin interogarea si segmentarea datelor brute salvate in `silviu-extract_2026060
 | Sunt prezent pe traseu in **weekend-ul nocturn** (Sambata si Duminica, orele 22:00 - 04:00).         | **Nu anulez prematur cursele** din pozitia de sofer inainte de cele 5 minute regulamentare pentru a asigura taxa no-show. |
 | Prioritizez **cursele scurte (0-3 km)** in zone dense pentru un randament rapid de 1.7 LEI / minut.  | **Nu accept curse lungi in trafic intens** sau preluari in gol ce depasesc 1.5 km.                                        |
 
+---
+
 ### 📂 Structura Repository-ului
 
-- `/data` - Contine date CSV agregate si optimizate.
-- `/sql` - Interogarile SQL utilizate pentru extragerea metricilor.
-- `/python` - Scripturi Python pentru curatarea si prelucrarea datelor brute (`bolt_fleet_extractor.py`).
-- `/docs` - **[Aici gasiti analizele complete si detaliate pentru fiecare query](./docs/Analiza_Detaliata_RO.md)**
-- `/images` - Contine gif-ul cu prezentarea proiectului in BI
+### 📂 Structura Repository-ului
+
+- `/.github/workflows/` - Pipeline CI/CD GitHub Actions (`weekly_extraction.yml`).
+- `/python/` - Scriptul Python de extragere si incarcare Azure (`bolt_fleet_extractor.py`).
+- `/data/` - Folder radacina pentru date locale (`data_bronze/` este ignorat in Git pentru confidentialitate).
+- `/sql/` - Interogari SQL BigQuery si exporturile rezultatelor analitice.
+- `/docs/` - Analize detaliate pentru fiecare interogare SQL.
+- `/powerbi/` - Fisierul de raportare Power BI.
+- `/images/` - Resurse vizuale si GIF-uri de prezentare.
+
+---
 
 ### 🎛️ Dashboard Proiect
 
 - **Poti descarca fisierul local direct din repository: [📊 Descarca fisierul Power BI](./powerbi/Bolt_Analysis_Silviu.pbix)**
-
-/////////////////////////
-
-# 🚕 Bolt Driver Analytics & Performance Optimization (Bucharest, 2026)
-
-![Power BI Dashboard](images/powerBI_animation.gif)
-
-## 📌 Executive Summary
-
-An **end-to-end data engineering and business intelligence project** analyzing driver operations and trip metrics across the Bolt rideshare platform in Bucharest, Romania.
-
-This project covers the full data lifecycle: from **automated API data extraction via Python**, through **advanced SQL transformations and KPI modeling**, to an **interactive Power BI executive dashboard**. The analysis delivers actionable operational recommendations aimed at maximizing gross/net revenue, optimizing time utilization, and reducing fuel overhead.
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-- **Data Extraction & Ingestion:** Python (`requests`, `pandas`, REST API Bolt CSV export automation)
-- **Data Warehousing & Transformation:** SQL / BigQuery (`CTE`, `WINDOW functions`, `SAFE_CAST`, Regex Data Scrubbing)
-- **Business Intelligence & Visualization:** Power BI (DAX, Interactive Reporting, Dynamic Tooltips)
