@@ -1,0 +1,33 @@
+name: Weekly Bolt Data Extraction
+
+on:
+  schedule:
+    # Ruleaza in fiecare Luni la ora 03:00 UTC (06:00 dimineata ora Romaniei)
+    - cron: "0 3 * * 1"
+  workflow_dispatch: # Iti permite sa pornesti rularea si MANUAL din interfata GitHub oricand doresti
+
+jobs:
+  extract-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas pyarrow requests python-dotenv azure-storage-blob
+
+      - name: Run Extraction & Upload to Azure Bronze
+        env:
+          BOLT_CLIENT_ID: ${{ secrets.BOLT_CLIENT_ID }}
+          BOLT_CLIENT_SECRET: ${{ secrets.BOLT_CLIENT_SECRET }}
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        run: |
+          python python/bolt_fleet_extractor.py
