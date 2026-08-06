@@ -1,6 +1,5 @@
 .env
 myKey.env
-data/
 data_bronze/
 *.json
 *.parquet
