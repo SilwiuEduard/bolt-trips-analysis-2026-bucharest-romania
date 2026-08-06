@@ -1,4 +1,4 @@
-name: Weekly Bolt Data Extraction & Transformation
+name: Weekly Bolt Data Extraction & Transformation v2
 
 on:
   schedule:
