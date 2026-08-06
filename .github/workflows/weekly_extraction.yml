@@ -1,4 +1,4 @@
-name: Weekly Bolt Data Extraction
+name: Weekly Bolt Data Extraction & Transformation
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # Iti permite sa pornesti rularea si MANUAL din interfata GitHub oricand doresti
 
 jobs:
-  extract-and-upload:
+  pipeline:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas pyarrow requests python-dotenv azure-storage-blob
 
+      # --- PASUL 1 & 2 & 3: Extragere si Upload in Azure Bronze ---
       - name: Run Extraction & Upload to Azure Bronze
         env:
           BOLT_CLIENT_ID: ${{ secrets.BOLT_CLIENT_ID }}
@@ -31,3 +32,22 @@ jobs:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
         run: |
           python python/bolt_fleet_extractor.py
+
+      # --- PASUL 4: Autentificare Google Cloud / BigQuery ---
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      # --- PASUL 5: Rulare Script DDL (Create/Replace View) ---
+      - name: Create or Replace Silver Orders View
+        run: |
+          bq query --use_legacy_sql=false < sql/create_silver_orders.sql
+
+      # --- PASUL 6: Export catre Azure Silver Storage ---
+      - name: Export Silver Orders Data to Azure Storage
+        run: |
+          bq query --use_legacy_sql=false < sql/export_silver_orders.sql
