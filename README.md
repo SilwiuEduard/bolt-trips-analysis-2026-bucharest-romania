@@ -20,19 +20,21 @@ An **end-to-end Data Engineering & Business Intelligence pipeline** analyzing op
 This project covers the complete data lifecycle:
 
 1. **Automated Enterprise Extraction (Python + REST API):** Weekly incremental ingestion and backfill of raw operational data (`orders`, `state_logs`, `drivers`, `vehicles`).
-2. **Automated CI/CD Orchestration (GitHub Actions):** Scheduled jobs running weekly in the cloud to keep raw datasets up-to-date without manual intervention.
+2. **Automated CI/CD Orchestration (GitHub Actions):** Scheduled jobs running weekly in the cloud to execute the full pipeline (Python extraction, BigQuery SQL transformations, and automated data exports).
 3. **Private Cloud Storage (Azure Blob Storage - Bronze Layer):** Secure raw JSON/CSV storage isolated from public repositories for privacy and security.
-4. **Data Warehousing & Analytics (Google BigQuery SQL):** Clean transformation logic, window functions, and advanced metric calculations.
-5. **Executive Visualization (Power BI):** Dynamic dashboard tracking revenue efficiency, dead mileage, and optimal shift patterns.
+4. **Data Warehousing & SQL Transformation (Google BigQuery):** Clean transformation logic utilizing modular SQL queries, CTEs, window functions, and advanced filtering to generate Silver data models.
+5. **Automated Silver Layer Export (BigQuery to Azure Storage):** Pipeline automatically executes SQL scripts and exports cleaned, structured CSV datasets directly into the `silver` Azure Blob Storage container for downstream consumption.
+6. **Executive Visualization (Power BI):** Dynamic dashboard tracking revenue efficiency, dead mileage, and optimal shift patterns.
 
 ---
 
 ### 🛠️ Tech Stack & Architecture
 
 - **Extraction & Ingestion:** Python (`requests`, `pandas`, `azure-storage-blob`, `python-dotenv`)
-- **CI/CD & Orchestration:** GitHub Actions (Automated weekly Cron trigger)
-- **Data Lake (Bronze Layer):** Azure Blob Storage (Container: `bronze`)
-- **Data Warehousing & Transformation:** SQL / Google BigQuery (`CTE`, `WINDOW functions`, `SAFE_CAST`)
+- **CI/CD & Orchestration:** GitHub Actions (Automated weekly Cron trigger & manual workflow dispatch)
+- **Data Lake (Bronze Layer):** Azure Blob Storage (Container: `bronze` - raw data)
+- **Data Warehousing & Transformation:** SQL / Google BigQuery (`CTE`, `WINDOW functions`, `SAFE_CAST`, modular `.sql` scripts)
+- **Cleaned Data Storage (Silver Layer):** Azure Blob Storage (Container: `silver` - automated export of transformed datasets)
 - **Business Intelligence & Visualization:** Power BI (DAX, Interactive Reporting)
 
 ---
@@ -106,27 +108,29 @@ An applied Data Analytics project based on my real-world activity as a licensed 
 
 ## 🇷🇴 Versiunea in Romana
 
-### 📌 Prezentarea Proiectului
+### 📌 Prezentare Generală a Proiectului
 
-Un pipeline complet de **Data Engineering si Business Intelligence** pentru analiza performantei operationale si financiare in cadrul platformei de ride-sharing Bolt in Bucuresti.
+Un **pipeline complet de Data Engineering și Business Intelligence** care analizează performanța operațională și financiară a platformei de ride-sharing Bolt în București.
 
-Proiectul acopera intregul ciclu de viata al datelor:
+Acest proiect acoperă întregul ciclu de viață al datelor:
 
-1. **Extragere Automata Enterprise (Python + REST API):** Ingestie si backfill incremental saptamanal pentru datele brute (`orders`, `state_logs`, `drivers`, `vehicles`).
-2. **Orchestrare CI/CD Automata (GitHub Actions):** Rulari programate saptamanal in cloud pentru actualizarea datelor fara interventie manuala.
-3. **Stocare Privata Cloud (Azure Blob Storage - Bronze Layer):** Stocare securizata a datelor brute (JSON/CSV) izolata de repository-ul public pentru protectia datelor (GDPR).
-4. **Data Warehousing & Analiza (Google BigQuery SQL):** Interogari complexe, functii de fereastra (WINDOW functions) si calcularea KPI-urilor financiare.
-5. **Vizualizare de Nivel Executiv (Power BI):** Dashboard interactiv pentru urmarirea veniturilor, kilometrilor morti si optimizarea turelor.
+1. **Extragere Automatizată Enterprise (Python + REST API):** Ingestionare incrementală săptămânală și completare retroactivă (backfill) a datelor operaționale brute (`orders`, `state_logs`, `drivers`, `vehicles`).
+2. **Orchestrare Automatizată CI/CD (GitHub Actions):** Joburi programate săptămânal în cloud pentru rularea întregului flux (extragere Python, execuție scripturi SQL în BigQuery și export automat de date).
+3. **Stocare Securizată în Cloud (Azure Blob Storage - Stratul Bronze):** Stocare sigură pentru fișiere brute JSON/CSV, izolată de depozitele publice pentru confidențialitate și securitate.
+4. **Data Warehousing & Transformare SQL (Google BigQuery):** Logică de transformare curată folosind interogări SQL modulare, structuri CTE, funcții analitice de tip window și filtrare avansată pentru generarea modelelor de date Silver.
+5. **Export Automatizat în Stratul Silver (BigQuery la Azure Storage):** Pipeline-ul execută automat scripturile SQL și exportă seturile de date curățate și structurate (în format CSV) direct în containerul `silver` din Azure Blob Storage pentru analiză ulterioară.
+6. **Vizualizare Executivă (Power BI):** Dashboard dinamic care urmărește eficiența veniturilor, kilometrajul parcurs fără client (dead mileage) și tiparele optime de lucru pe ture.
 
 ---
 
-### 🛠️ Tehnologii si Instrumente Utilizate
+### 🛠️ Tehnologii Utilizate și Arhitectură
 
-- **Extragere si Ingestie:** Python (`requests`, `pandas`, `azure-storage-blob`, `python-dotenv`)
-- **CI/CD si Orchestrare:** GitHub Actions (Cron job saptamanal)
-- **Data Lake (Bronze Layer):** Azure Blob Storage (Container: `bronze`)
-- **Data Warehousing si Transforma:r** SQL / Google BigQuery (`CTE`, `WINDOW functions`, `SAFE_CAST`)
-- **Business Intelligence:** Power BI (DAX, Raportare Interactiva)
+- **Extragere și Ingestionare:** Python (`requests`, `pandas`, `azure-storage-blob`, `python-dotenv`)
+- **CI/CD și Orchestrare:** GitHub Actions (Declanșator automatizat Cron săptămânal și lansare manuală)
+- **Data Lake (Stratul Bronze):** Azure Blob Storage (Container: `bronze` - date brute)
+- **Data Warehousing și Transformare:** SQL / Google BigQuery (`CTE`, `WINDOW functions`, `SAFE_CAST`, interogări modulare `.sql`)
+- **Stocare Date Curățate (Stratul Silver):** Azure Blob Storage (Container: `silver` - export automatizat de date transformate)
+- **Business Intelligence și Vizualizare:** Power BI (DAX, Raportare Interactivă)
 
 ---
 
