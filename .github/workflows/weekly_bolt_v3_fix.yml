@@ -1,0 +1,118 @@
+name: Weekly Bolt Data Extraction & Transformation v3
+
+on:
+  schedule:
+    # Ruleaza in fiecare Luni la ora 03:00 UTC (06:00 dimineata ora Romaniei)
+    - cron: "0 3 * * 1"
+  workflow_dispatch: # Iti permite sa pornesti rularea si MANUAL din interfata GitHub oricand doresti
+
+  # --- MASURA 1: Anularea automata a rularilor vechi/blocated ---
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-22.04
+    # --- MASURA 2: Limita maxima de timp per job (daca se blocheaza ceva, se opreste singur) ---
+    timeout-minutes: 15
+
+    steps:
+      # --- LOG START ---
+      - name: Log Start Timestamp
+        run: echo "START WORKFLOW at $(date -u)"
+
+      - name: Log Runner Info
+        run: |
+          echo "Runner OS: $(uname -a)"
+          echo "Current directory: $(pwd)"
+          echo "Listing files:"
+          ls -R .
+
+        # --- CHECKOUT ---
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # --- PYTHON SETUP ---
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Log Python Info
+        run: |
+          echo "Python version:"
+          python --version
+          echo "Pip version:"
+          pip --version
+
+      # --- INSTALL DEPENDENCIES ---
+      - name: Install Dependencies
+        run: |
+          echo "Installing dependencies at $(date -u)"
+          python -m pip install --upgrade pip
+          pip install pandas pyarrow requests python-dotenv azure-storage-blob
+          echo "Dependencies installed at $(date -u)"
+
+      # --- EXTRACTION ---
+      - name: Debug Before Extraction
+        run: echo "Running bolt_fleet_extractor.py at $(date -u)"
+
+      # --- PASUL 1 & 2 & 3: Extragere si Upload in Azure Bronze ---
+      - name: Run Extraction & Upload to Azure Bronze
+        env:
+          BOLT_CLIENT_ID: ${{ secrets.BOLT_CLIENT_ID }}
+          BOLT_CLIENT_SECRET: ${{ secrets.BOLT_CLIENT_SECRET }}
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        run: |
+          python python/bolt_fleet_extractor.py
+
+      - name: Log Extraction Completed
+        if: success()
+        run: echo "Extraction completed successfully at $(date -u)"
+
+      - name: Log Extraction Failed
+        if: failure()
+        run: echo "Extraction FAILED at $(date -u)"
+
+      # --- PASUL 4: Autentificare Google Cloud / BigQuery ---
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Log GCloud Info
+        run: |
+          echo "gcloud version:"
+          gcloud --version
+          echo "bq version:"
+          bq version
+
+      # --- PASUL 5: Rulare Script DDL (Create/Replace View) ---
+      - name: Debug BigQuery SQL (DDL)
+        run: |
+          echo "Running DDL SQL at $(date -u)"
+          echo "SQL content:"
+          cat sql/create_silver_orders.sql
+
+      - name: Create or Replace Silver Orders View
+        run: |
+          bq query --use_legacy_sql=false < sql/create_silver_orders.sql
+
+      - name: Debug BigQuery SQL (Export)
+        run: |
+          echo "Running EXPORT SQL at $(date -u)"
+          echo "SQL content:"
+          cat sql/export_silver_orders.sql
+
+      # --- PASUL 6: Export catre Azure Silver Storage ---
+      - name: Export Silver Orders Data to Azure Storage
+        run: |
+          bq query --use_legacy_sql=false < sql/export_silver_orders.sql
+
+        # --- LOG END ---
+      - name: Log End Timestamp
+        run: echo "END WORKFLOW at $(date -u)"
