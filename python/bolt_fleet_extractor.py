@@ -263,18 +263,25 @@ def main() -> None:
     raw_dir = out_dir / "raw"
     raw_dir.mkdir(parents=True, exist_ok=True)
 
-    today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
-    yesterday_end = today_start - timedelta(seconds=1)
+    # Determinam Lunea din saptamana curenta la ora 00:00:00
+    now_utc = datetime.now(timezone.utc)
+    monday_this_week = (now_utc - timedelta(days=now_utc.weekday())).replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
+
+    # Intervalul implicit: Saptamana trecuta completa (Luni 00:00:00 - Duminica 23:59:59)
+    default_start = monday_this_week - timedelta(days=7)
+    default_end = monday_this_week - timedelta(seconds=1)
 
     start = (
         datetime.strptime(args.start, "%Y-%m-%d").replace(tzinfo=timezone.utc)
         if args.start
-        else today_start - timedelta(days=args.days_back)
+        else default_start
     )
     end = (
         datetime.strptime(args.end, "%Y-%m-%d").replace(tzinfo=timezone.utc, hour=23, minute=59, second=59)
         if args.end
-        else yesterday_end
+        else default_end
     )
 
     run_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
