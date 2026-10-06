@@ -121,6 +121,15 @@ jobs:
         run: |
           bq query --use_legacy_sql=false < sql/export_silver_state_logs.sql
 
+      # --- PASUL 7: Generare Rapoarte Analitice (Gold Layer) ---
+      - name: Run Gold Layer Analytics
+        run: |
+          echo "Running Gold Tier Analytics at $(date -u)"
+          for file in sql/gold/*.sql; do
+            echo "Executing $file..."
+            bq query --use_legacy_sql=false < "$file"
+          done
+
         # --- LOG END ---
       - name: Log End Timestamp
         run: echo "END WORKFLOW at $(date -u)"
