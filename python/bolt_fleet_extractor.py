@@ -38,6 +38,7 @@ SCOPE = "fleet-integration:api"
 MAX_LIMIT_DEFAULT = 1000
 MAX_LIMIT_VEHICLES = 100
 TOKEN_SAFETY_MARGIN_S = 60
+
 DEFAULT_CHUNK_DAYS = 28
 DEFAULT_LOOKBACK_DAYS = 7   # Implicit extragem ultimele 7 zile (Enterprise Weekly Incremental)
 
@@ -57,8 +58,12 @@ class BoltAuth:
         resp = requests.post(
             TOKEN_URL,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
-            data={"client_id": self.client_id, "client_secret": self.client_secret,
-                  "grant_type": "client_credentials", "scope": SCOPE},
+            data={
+                "client_id": self.client_id, 
+                "client_secret": self.client_secret,
+                "grant_type": "client_credentials", 
+                "scope": SCOPE
+            },
             timeout=30,
         )
         if resp.status_code != 200:
@@ -149,7 +154,7 @@ def build_raw_dataframe(records: list[dict], run_ts: str) -> pd.DataFrame:
     if not records:
         return pd.DataFrame()
 
-    df = pd.json_normalize(records, sep=".")
+    df = pd.json_normalize(records, sep="_")
 
     # Convertim doar listele/dict-urile imbricate ramase in string JSON curat
     for col in df.columns:
@@ -311,9 +316,13 @@ def main() -> None:
             save_df(build_raw_dataframe(list(drivers_dict.values()), run_ts), f"drivers_{week_suffix}", out_dir)
             save_df(build_raw_dataframe(list(vehicles_dict.values()), run_ts), f"vehicles_{week_suffix}", out_dir)
 
-            # Upload automat in Azure Blob Storage (JSON + CSV)
+            # Upload automat in Azure Blob Storage (JSON + PARQUET + CSV)
             upload_to_azure_bronze(raw_dir / f"orders_{week_suffix}.json", f"raw/orders_{week_suffix}.json")
             upload_to_azure_bronze(raw_dir / f"state_logs_{week_suffix}.json", f"raw/state_logs_{week_suffix}.json")
+            
+            upload_to_azure_bronze(out_dir / f"orders_{week_suffix}.parquet", f"orders_{week_suffix}.parquet")
+            upload_to_azure_bronze(out_dir / f"state_logs_{week_suffix}.parquet", f"state_logs_{week_suffix}.parquet")
+            
             upload_to_azure_bronze(out_dir / f"orders_{week_suffix}.csv", f"orders_{week_suffix}.csv")
             upload_to_azure_bronze(out_dir / f"state_logs_{week_suffix}.csv", f"state_logs_{week_suffix}.csv")
             upload_to_azure_bronze(out_dir / f"drivers_{week_suffix}.csv", f"drivers_{week_suffix}.csv")
@@ -343,9 +352,13 @@ def main() -> None:
         save_df(build_raw_dataframe(list(drivers_dict.values()), run_ts), f"drivers_{week_suffix}", out_dir)
         save_df(build_raw_dataframe(list(vehicles_dict.values()), run_ts), f"vehicles_{week_suffix}", out_dir)
 
-        # Upload automat in Azure Blob Storage (JSON + CSV)
+        # Upload automat in Azure Blob Storage (JSON + PARQUET + CSV)
         upload_to_azure_bronze(raw_dir / f"orders_{week_suffix}.json", f"raw/orders_{week_suffix}.json")
         upload_to_azure_bronze(raw_dir / f"state_logs_{week_suffix}.json", f"raw/state_logs_{week_suffix}.json")
+        
+        upload_to_azure_bronze(out_dir / f"orders_{week_suffix}.parquet", f"orders_{week_suffix}.parquet")
+        upload_to_azure_bronze(out_dir / f"state_logs_{week_suffix}.parquet", f"state_logs_{week_suffix}.parquet")
+        
         upload_to_azure_bronze(out_dir / f"orders_{week_suffix}.csv", f"orders_{week_suffix}.csv")
         upload_to_azure_bronze(out_dir / f"state_logs_{week_suffix}.csv", f"state_logs_{week_suffix}.csv")
         upload_to_azure_bronze(out_dir / f"drivers_{week_suffix}.csv", f"drivers_{week_suffix}.csv")
