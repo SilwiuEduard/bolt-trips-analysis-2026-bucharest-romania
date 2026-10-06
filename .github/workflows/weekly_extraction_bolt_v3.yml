@@ -102,6 +102,10 @@ jobs:
         run: |
           bq query --use_legacy_sql=false < sql/create_silver_orders.sql
 
+      - name: Create or Replace Silver State Logs View
+        run: |
+          bq query --use_legacy_sql=false < sql/create_silver_state_logs.sql
+
       - name: Debug BigQuery SQL (Export)
         run: |
           echo "Running EXPORT SQL at $(date -u)"
@@ -112,6 +116,10 @@ jobs:
       - name: Export Silver Orders Data to Azure Storage
         run: |
           bq query --use_legacy_sql=false < sql/export_silver_orders.sql
+
+      - name: Export Silver State Logs Data to Azure Storage
+        run: |
+          bq query --use_legacy_sql=false < sql/export_silver_state_logs.sql
 
         # --- LOG END ---
       - name: Log End Timestamp
