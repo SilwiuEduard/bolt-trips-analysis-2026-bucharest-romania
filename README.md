@@ -2,6 +2,8 @@
 
 <p align="center">
   <img src="./images/powerBI_animation.gif" alt="Power BI Dashboard Demo" width="600">
+  <br><br>
+  <img src="./images/diagram.png" alt="Data Pipeline Architecture" width="800">
 </p>
 
 Choose Language / Alege Limba:
@@ -182,8 +184,6 @@ Este un proiect de Data Analytics aplicat, bazat pe activitatea mea reala ca sof
 | Prioritizez **cursele scurte (0-3 km)** in zone dense pentru un randament rapid de 1.7 LEI / minut.  | **Nu accept curse lungi in trafic intens** sau preluari in gol ce depasesc 1.5 km.                                        |
 
 ---
-
-### 📂 Structura Repository-ului
 
 ### 📂 Structura Repository-ului
 
