@@ -156,6 +156,12 @@ def build_raw_dataframe(records: list[dict], run_ts: str) -> pd.DataFrame:
 
     df = pd.json_normalize(records, sep="_")
 
+    # Forțăm Pandas să facă absolut toate timestamp-urile, distanțele și datele financiare DOUBLE (float64)
+    # Acest lucru previne erorile de schemă Parquet în BigQuery între loturi diferite.
+    for col in df.columns:
+        if col.endswith(("_timestamp", "_distance", "_at_matching")) or col.startswith("order_price_"):
+            df[col] = pd.to_numeric(df[col], errors='coerce').astype('float64')
+
     # Convertim doar listele/dict-urile imbricate ramase in string JSON curat
     for col in df.columns:
         if df[col].apply(lambda v: isinstance(v, (list, dict))).any():
@@ -247,12 +253,12 @@ def upload_to_azure_bronze(local_file_path: Path, blob_name: str) -> None:
         blob_service_client = BlobServiceClient.from_connection_string(connect_str)
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
 
-        print(f"☁️ Se incarca {blob_name} in Azure Container '{container_name}'...")
+        print(f"[INFO] Se incarca {blob_name} in Azure Container '{container_name}'...")
         with open(local_file_path, "rb") as data:
             blob_client.upload_blob(data, overwrite=True)
-        print(f"✅ Incarcat cu succes in Azure: {blob_name}")
+        print(f"[OK] Incarcat cu succes in Azure: {blob_name}")
     except Exception as e:
-        print(f"❌ Eroare la incarcarea in Azure: {e}")
+        print(f"[ERROR] Eroare la incarcarea in Azure: {e}")
 
         
 def main() -> None:
